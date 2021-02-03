@@ -16,21 +16,21 @@ import desafio.projuris.dev.repositories.clienteRepository;
 @RestController
 public class clientesController {
 
-	@Autowired
+    @Autowired
     private clienteRepository clienteRepository;
 
     @GetMapping("/clientes")
     public List<Cliente> retornaTodos() {
-	    return clienteRepository.findAll();
+        return clienteRepository.findAll();
     }
 
     @PostMapping("/clientes")
     public ResponseEntity<Object> criarCliente(@RequestBody Cliente cliente) {
         Cliente clienteSalvo = clienteRepository.save(cliente);
-    
+
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(clienteSalvo.getId()).toUri();
-    
+
         return ResponseEntity.created(location).build();
     }
 

@@ -12,25 +12,26 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import desafio.projuris.dev.entities.Ordem;
 import desafio.projuris.dev.repositories.ordemRepository;
+import desafio.projuris.dev.repositories.clienteRepository;
 
 @RestController
 public class ordensController {
 
-	@Autowired
+    @Autowired
     private ordemRepository ordemRepository;
+    @Autowired
+    private clienteRepository clienteRepository;
 
     @GetMapping("/ordens")
     public List<Ordem> retornaTodos() {
-	    return ordemRepository.findAll();
+        return ordemRepository.findAll();
     }
 
     @PostMapping("/ordens")
     public ResponseEntity<Object> criarOrdem(@RequestBody Ordem ordem) {
         Ordem ordemSalva = ordemRepository.save(ordem);
-    
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(ordemSalva.getId()).toUri();
-    
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(ordemSalva.getId())
+                .toUri();
         return ResponseEntity.created(location).build();
     }
 

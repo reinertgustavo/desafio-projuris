@@ -26,7 +26,7 @@ public class Ordem {
   private String problema;
 
   @Enumerated(EnumType.STRING)
-  private Status status;
+  private Status status = Status.ABERTO;
 
   @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(name = "equipamento_ordem", joinColumns = @JoinColumn(name = "equipamento_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ordem_id", referencedColumnName = "id"))
@@ -36,5 +36,9 @@ public class Ordem {
   @ManyToOne
   @JoinColumn(name = "cliente_id")
   private Cliente cliente;
+
+  @ManyToOne
+  @JoinColumn(name = "funcionario_id")
+  private Funcionario funcionario;
 
 }
