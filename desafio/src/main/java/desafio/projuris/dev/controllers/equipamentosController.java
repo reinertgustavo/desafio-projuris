@@ -7,22 +7,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import desafio.projuris.dev.entities.Equipamento;
 import desafio.projuris.dev.repositories.equipamentoRepository;
 
 @RestController
+@RequestMapping("/equipamentos")
 public class equipamentosController {
     @Autowired
     private equipamentoRepository equipamentoRepository;
 
-    @GetMapping("/equipamentos")
+    @GetMapping()
     public List<Equipamento> retornaTodos() {
         return equipamentoRepository.findAll();
     }
 
-    @PostMapping("/equipamentos")
+    @PostMapping()
     public ResponseEntity<Object> criarEquipamento(@RequestBody Equipamento equipamento) {
         Equipamento equipamentoSalvo = equipamentoRepository.save(equipamento);
 
